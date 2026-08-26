@@ -1,1 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-lora: "Lora", serif;
+  --font-sans: "Nunito", sans-serif;
+  --color-primary-50: #fef7ee;
+  --color-primary-100: #feecd6;
+  --color-primary-200: #fcd5ac;
+  --color-primary-300: #f9b878;
+  --color-primary-400: #f68f41;
+  --color-primary-500: #f3701c;
+  --color-primary-600: #e45612;
+  --color-primary-700: #b13c10;
+  --color-primary-800: #963416;
+  --color-primary-900: #792d15;
+  --color-primary-950: #411409;
+}
