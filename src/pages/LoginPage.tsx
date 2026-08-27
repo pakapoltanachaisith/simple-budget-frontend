@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import InputError from "../components/InputError";
-import Label from "../components/Label";
 import { Link } from "react-router";
-import { loginFormSchema, type LoginFormData } from "../lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import Button from "@components/Button";
+import Input from "@components/Input";
+import InputError from "@components/InputError";
+import Label from "@components/Label";
+import { loginFormSchema, type LoginFormData } from "@/lib/validation";
 
 export default function LoginPage() {
   const {

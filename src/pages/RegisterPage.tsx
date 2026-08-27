@@ -1,11 +1,12 @@
-import Button from "../components/Button";
-import Input from "../components/Input";
-import InputError from "../components/InputError";
-import Label from "../components/Label";
-import { Link } from "react-router";
-import { registerFormSchema, type RegisterFormData } from "../lib/validation";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import Button from "@components/Button";
+import Input from "@components/Input";
+import InputError from "@components/InputError";
+import Label from "@components/Label";
+import { registerFormSchema, type RegisterFormData } from "@/lib/validation";
 
 export default function RegisterPage() {
   const {
