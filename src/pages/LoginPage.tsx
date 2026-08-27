@@ -7,6 +7,7 @@ import Input from "@components/Input";
 import InputError from "@components/InputError";
 import Label from "@components/Label";
 import { loginFormSchema, type LoginFormData } from "@/lib/validation";
+import PasswordInput from "@/components/PasswordInput";
 
 export default function LoginPage() {
   const {
@@ -45,22 +46,22 @@ export default function LoginPage() {
                   {...register("email")}
                   id="email"
                   type="email"
-                  required
                   autoComplete="email"
                   placeholder="johndoe@example.com"
                   disabled={isLoading}
+                  required
                 />
                 <InputError message={errors.email?.message} />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input
+                <PasswordInput
                   {...register("password")}
                   id="password"
-                  required
                   type="password"
                   disabled={isLoading}
+                  required
                 />
                 <InputError message={errors.password?.message} />
               </div>

@@ -7,6 +7,7 @@ import Input from "@components/Input";
 import InputError from "@components/InputError";
 import Label from "@components/Label";
 import { registerFormSchema, type RegisterFormData } from "@/lib/validation";
+import PasswordInput from "@/components/PasswordInput";
 
 export default function RegisterPage() {
   const {
@@ -65,7 +66,7 @@ export default function RegisterPage() {
               </div>
               <div className="space-y-1">
                 <Label htmlFor="password">Password</Label>
-                <Input
+                <PasswordInput
                   id="password"
                   type="password"
                   {...register("password")}
@@ -76,7 +77,7 @@ export default function RegisterPage() {
               </div>
               <div className="space-y-1">
                 <Label htmlFor="password_confirmation">Confirm Password</Label>
-                <Input
+                <PasswordInput
                   id="password_confirmation"
                   type="password"
                   {...register("password_confirmation")}
