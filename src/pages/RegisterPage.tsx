@@ -3,8 +3,23 @@ import Input from "../components/Input";
 import InputError from "../components/InputError";
 import Label from "../components/Label";
 import { Link } from "react-router";
+import { registerFormSchema, type RegisterFormData } from "../lib/validation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function RegisterPage() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isLoading },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerFormSchema),
+  });
+
+  const onSubmit = async (data: RegisterFormData) => {
+    alert("Submit Register form");
+  };
+
   return (
     <>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -20,41 +35,59 @@ export default function RegisterPage() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Inputs */}
             <div className="space-y-2">
               <div className="space-y-1">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" required autoComplete="email" />
-                <InputError message="Name is required." />
+                <Input
+                  id="name"
+                  {...register("name")}
+                  placeholder="John Doe"
+                  required
+                  disabled={isLoading}
+                />
+                <InputError message={errors?.name?.message} />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="email">Email address</Label>
                 <Input
                   id="email"
-                  name="email"
                   type="email"
-                  required
                   autoComplete="email"
+                  placeholder="johndoe@example.com"
+                  {...register("email")}
+                  required
+                  disabled={isLoading}
                 />
+                <InputError message={errors?.email?.message} />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" name="password" required type="password" />
+                <Input
+                  id="password"
+                  type="password"
+                  {...register("password")}
+                  required
+                  disabled={isLoading}
+                />
+                <InputError message={errors?.password?.message} />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="password_confirmation">Confirm Password</Label>
                 <Input
                   id="password_confirmation"
-                  name="password"
-                  required
                   type="password"
+                  {...register("password_confirmation")}
+                  required
+                  disabled={isLoading}
                 />
+                <InputError message={errors?.password_confirmation?.message} />
               </div>
             </div>
 
             <div className="mt-10">
-              <Button type="submit" fullWidth>
+              <Button type="submit" fullWidth disabled={isLoading}>
                 Create Account
               </Button>
             </div>
