@@ -4,8 +4,8 @@ export const registerFormSchema = z
   .object({
     name: z.string().trim().min(3).max(255),
     email: z.string().trim().email(),
-    password: z.string().min(8),
-    password_confirmation: z.string(),
+    password: z.string().min(8).nonempty(),
+    password_confirmation: z.string().nonempty(),
   })
   .refine((data) => data.password === data.password_confirmation, {
     message: "Password doesn't match",
@@ -16,7 +16,7 @@ export type RegisterFormData = z.infer<typeof registerFormSchema>;
 
 export const loginFormSchema = z.object({
   email: z.string().email(),
-  password: z.string(),
+  password: z.string().nonempty(),
 });
 
 export type LoginFormData = z.infer<typeof loginFormSchema>;
