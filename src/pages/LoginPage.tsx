@@ -1,10 +1,25 @@
+import { useForm } from "react-hook-form";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import InputError from "../components/InputError";
 import Label from "../components/Label";
 import { Link } from "react-router";
+import { loginFormSchema, type LoginFormData } from "../lib/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function LoginPage() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isLoading },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginFormSchema),
+  });
+
+  const onSubmit = async (data: LoginFormData) => {
+    alert("submit!");
+  };
+
   return (
     <>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -20,29 +35,38 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Inputs */}
             <div className="space-y-3">
               <div className="space-y-2">
                 <Label htmlFor="email">Email address</Label>
                 <Input
+                  {...register("email")}
                   id="email"
-                  name="email"
                   type="email"
                   required
                   autoComplete="email"
+                  placeholder="johndoe@example.com"
+                  disabled={isLoading}
                 />
-                <InputError message="Email invalid" />
+                <InputError message={errors.email?.message} />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" name="password" required type="password" />
+                <Input
+                  {...register("password")}
+                  id="password"
+                  required
+                  type="password"
+                  disabled={isLoading}
+                />
+                <InputError message={errors.password?.message} />
               </div>
             </div>
 
             <div className="mt-10">
-              <Button type="submit" fullWidth>
+              <Button type="submit" fullWidth disabled={isLoading}>
                 Continue
               </Button>
             </div>
