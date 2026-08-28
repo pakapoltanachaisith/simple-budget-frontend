@@ -21,7 +21,15 @@ export const login = async (
   });
 
   if (!response.ok) {
-    throw new Error("Failed to Log in");
+    if (response.status === 422) {
+      throw new Error("Invalid credentials.");
+    }
+
+    if (response.status.toString().startsWith("5")) {
+      throw new Error("The server is currently down. Please try again later.");
+    }
+
+    throw new Error("Something went wrong.");
   }
 
   const data = await response.json();

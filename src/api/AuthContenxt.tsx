@@ -16,6 +16,7 @@ interface AuthContextValue {
   errorMessage: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  clearError: () => void;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -33,12 +34,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string) => {
     setLoading(true);
+    setErrorMessage(null);
 
     try {
       const result = await apiLogin(email, password);
       setUser(result.user);
-    } catch (error) {
-      setErrorMessage("Failed to log in.");
+    } catch (error: any) {
+      setErrorMessage(error.message || "Something went wrong.");
     } finally {
       setLoading(false);
     }
@@ -49,9 +51,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
 
+  const clearError = () => {
+    setErrorMessage(null);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, loading, errorMessage, login, logout }}>
+      value={{ user, loading, errorMessage, login, logout, clearError }}>
       {children}
     </AuthContext.Provider>
   );
