@@ -1,27 +1,8 @@
-import { useForm } from "react-hook-form";
 import { Link } from "react-router";
-import { zodResolver } from "@hookform/resolvers/zod";
 
-import Button from "@components/Button";
-import Input from "@components/Input";
-import InputError from "@components/InputError";
-import Label from "@components/Label";
-import { loginFormSchema, type LoginFormData } from "@/lib/validation";
-import PasswordInput from "@/components/PasswordInput";
+import LoginForm from "@/components/LoginForm";
 
 export default function LoginPage() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isLoading },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginFormSchema),
-  });
-
-  const onSubmit = async (data: LoginFormData) => {
-    alert("submit!");
-  };
-
   return (
     <>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -37,43 +18,7 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* Inputs */}
-            <div className="space-y-3">
-              <div className="space-y-2">
-                <Label htmlFor="email">Email address</Label>
-                <Input
-                  {...register("email")}
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  placeholder="johndoe@example.com"
-                  disabled={isLoading}
-                  required
-                />
-                <InputError message={errors.email?.message} />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <PasswordInput
-                  {...register("password")}
-                  id="password"
-                  type="password"
-                  disabled={isLoading}
-                  required
-                />
-                <InputError message={errors.password?.message} />
-              </div>
-            </div>
-
-            <div className="mt-10">
-              <Button type="submit" fullWidth disabled={isLoading}>
-                Continue
-              </Button>
-            </div>
-          </form>
-
+          <LoginForm />
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             Don't have an account?
             <Link
