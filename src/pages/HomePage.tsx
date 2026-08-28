@@ -1,17 +1,23 @@
-import { getCurrentUser } from "@/api/auth";
-import { useEffect } from "react";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
+
+import { useAuth } from "@/api/AuthContenxt";
 
 export default function HomePage() {
-  useEffect(() => {
-    getCurrentUser().then((user) => console.log(user));
-  }, []);
+  const { user, loading } = useAuth();
+  let navigate = useNavigate();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!loading && !user) {
+    return navigate("/login");
+  }
 
   return (
     <div>
       <h1 className="text-4xl text-blue-500">Home Page</h1>
-      <Link to="/login">Go to Login Page</Link>
-      <Link to="/register">Go to Register Page</Link>
+      <p>Hello, {user?.name}</p>
     </div>
   );
 }
