@@ -7,8 +7,11 @@ import {
 } from "react";
 
 import type { User } from "./types";
-import { login as apiLogin, getCurrentUser as apiGetCurrentUser } from "./auth";
-import { revokeToken } from "./token";
+import {
+  login as apiLogin,
+  getCurrentUser as apiGetCurrentUser,
+  logout as apiLogout,
+} from "./auth";
 
 interface AuthContextValue {
   user: User | null | undefined;
@@ -46,9 +49,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const logout = () => {
-    revokeToken();
-    setUser(null);
+  const logout = async () => {
+    if (!user) return;
+
+    setLoading(true);
+    try {
+      await apiLogout();
+      setUser(null);
+    } catch (error: any) {
+      alert("Failed to logout");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const clearError = () => {

@@ -1,5 +1,5 @@
 import { apiFetch } from "@/api/client";
-import { setToken } from "@/api/token";
+import { revokeToken, setToken } from "@/api/token";
 import type { LoginResponse, User } from "@/api/types";
 
 export const getCurrentUser = async (): Promise<User | null> => {
@@ -36,4 +36,14 @@ export const login = async (
   setToken(data.token);
 
   return data;
+};
+
+export const logout = async () => {
+  const response = await apiFetch("/logout", { method: "POST" });
+
+  if (!response.ok) {
+    throw new Error("Someting went wrong");
+  }
+
+  revokeToken();
 };
