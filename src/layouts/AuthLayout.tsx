@@ -6,7 +6,7 @@ export default function AuthLayout() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
 
-  if (loading) {
+  if (user === undefined) {
     return (
       <div className="h-screen w-screen overflow-y-auto overflow-x-hidden flex items-center justify-center bg-stone-50-50">
         <div className="text-center">

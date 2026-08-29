@@ -11,7 +11,7 @@ import { login as apiLogin, getCurrentUser as apiGetCurrentUser } from "./auth";
 import { revokeToken } from "./token";
 
 interface AuthContextValue {
-  user: User | null;
+  user: User | null | undefined;
   loading: boolean;
   errorMessage: string | null;
   login: (email: string, password: string) => Promise<void>;
@@ -22,7 +22,7 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null | undefined>(undefined);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
