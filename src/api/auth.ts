@@ -32,7 +32,7 @@ export const login = async (email: string, password: string): Promise<User> => {
   const data = await response.json();
   setToken(data.token);
 
-  return data;
+  return data.user;
 };
 
 export const register = async (
