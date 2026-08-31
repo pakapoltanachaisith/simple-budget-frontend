@@ -6,7 +6,7 @@ import Navbar from "@/components/mainLayout/Navbar";
 import Sidebar from "@/components/mainLayout/Sidebar";
 
 export default function MainLayout() {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
 
   if (user === undefined) {
     return (
@@ -21,13 +21,13 @@ export default function MainLayout() {
     );
   }
 
-  if (!loading && !user) {
+  if (user === null) {
     return <Navigate to="/login" />;
   }
 
   return (
     <div className="h-screen w-screen overflow-hidden grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]">
-      <Navbar user={user!} />
+      <Navbar />
       <Sidebar />
       <main className="overflow-auto bg-neutral-100 p-8">
         <Outlet />
