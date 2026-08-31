@@ -1,9 +1,8 @@
 import { useAuth } from "@/api/AuthContenxt";
 import { Loader2 } from "lucide-react";
-import { Outlet, useNavigate } from "react-router";
+import { Navigate, Outlet } from "react-router";
 
 export default function AuthLayout() {
-  const navigate = useNavigate();
   const { user, loading } = useAuth();
 
   if (user === undefined) {
@@ -20,7 +19,7 @@ export default function AuthLayout() {
   }
 
   if (!loading && user) {
-    return navigate("/");
+    return <Navigate to="/" />;
   }
 
   return (

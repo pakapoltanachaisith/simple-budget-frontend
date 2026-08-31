@@ -1,18 +1,17 @@
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 
 import { useAuth } from "@/api/AuthContenxt";
 import Button from "@/components/Button";
 
 export default function HomePage() {
   const { user, loading, logout } = useAuth();
-  let navigate = useNavigate();
 
   if (loading) {
     return <p>Loading...</p>;
   }
 
   if (!loading && !user) {
-    return navigate("/login");
+    return <Navigate to="/login" />;
   }
 
   return (
