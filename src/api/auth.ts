@@ -1,6 +1,6 @@
 import { apiFetch } from "@/api/client";
 import { revokeToken, setToken } from "@/api/token";
-import type { LoginResponse, User } from "@/api/types";
+import type { User } from "@/api/types";
 
 export const getCurrentUser = async (): Promise<User | null> => {
   const response = await apiFetch("/me");
@@ -11,10 +11,7 @@ export const getCurrentUser = async (): Promise<User | null> => {
   return data.user;
 };
 
-export const login = async (
-  email: string,
-  password: string,
-): Promise<LoginResponse> => {
+export const login = async (email: string, password: string): Promise<User> => {
   const response = await apiFetch("/login", {
     method: "POST",
     body: JSON.stringify({ email, password }),
@@ -36,6 +33,36 @@ export const login = async (
   setToken(data.token);
 
   return data;
+};
+
+export const register = async (
+  name: string,
+  email: string,
+  password: string,
+  passwordConfirmation: string,
+): Promise<User> => {
+  const response = await apiFetch("/register", {
+    method: "POST",
+    body: JSON.stringify({
+      name,
+      email,
+      password,
+      password_confirmation: passwordConfirmation,
+    }),
+  });
+
+  if (!response.ok) {
+    if (response.status.toString().startsWith("5")) {
+      throw new Error("The server is currently down. Please try again later.");
+    }
+
+    throw new Error("Something went wrong.");
+  }
+
+  const data = await response.json();
+  setToken(data.token);
+
+  return data.user;
 };
 
 export const logout = async () => {

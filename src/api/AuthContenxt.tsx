@@ -11,6 +11,7 @@ import {
   login as apiLogin,
   getCurrentUser as apiGetCurrentUser,
   logout as apiLogout,
+  register as apiRegister,
 } from "./auth";
 
 interface AuthContextValue {
@@ -18,6 +19,12 @@ interface AuthContextValue {
   loading: boolean;
   errorMessage: string | null;
   login: (email: string, password: string) => Promise<void>;
+  register: (
+    name: string,
+    email: string,
+    password: string,
+    passwordConfirmation: string,
+  ) => Promise<void>;
   logout: () => void;
   clearError: () => void;
 }
@@ -40,8 +47,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setErrorMessage(null);
 
     try {
-      const result = await apiLogin(email, password);
-      setUser(result.user);
+      const authUser = await apiLogin(email, password);
+      setUser(authUser);
+    } catch (error: any) {
+      setErrorMessage(error.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const register = async (
+    name: string,
+    email: string,
+    password: string,
+    passwordConfirmation: string,
+  ) => {
+    setLoading(true);
+    setErrorMessage(null);
+
+    try {
+      const authUser = await apiRegister(
+        name,
+        email,
+        password,
+        passwordConfirmation,
+      );
+      setUser(authUser);
     } catch (error: any) {
       setErrorMessage(error.message || "Something went wrong.");
     } finally {
@@ -69,7 +100,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, errorMessage, login, logout, clearError }}>
+      value={{
+        user,
+        loading,
+        errorMessage,
+        login,
+        register,
+        logout,
+        clearError,
+      }}>
       {children}
     </AuthContext.Provider>
   );
