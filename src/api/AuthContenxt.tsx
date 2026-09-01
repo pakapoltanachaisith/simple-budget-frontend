@@ -39,6 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     apiGetCurrentUser()
       .then((user) => setUser(user))
+      .catch(() => setUser(null))
       .finally(() => setLoading(false));
   }, []);
 

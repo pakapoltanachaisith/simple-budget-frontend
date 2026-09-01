@@ -3,11 +3,16 @@ import { PanelLeft } from "lucide-react";
 
 import NavabarDropdown from "./NavabarDropdown";
 
-export default function Navbar() {
+interface NavbarProps {
+  onOpenDrawer: () => void;
+}
+
+export default function Navbar({ onOpenDrawer }: NavbarProps) {
   return (
     <header className="col-span-12 self-start px-6 py-4 flex justify-between items-center border-b border-b-neutral-200 bg-white">
       <div className="flex items-center">
         <button
+          onClick={onOpenDrawer}
           type="button"
           className="lg:hidden mr-4 p-1.5 hover:opacity-50 transition-opacity">
           <span className="sr-only">open side drawer</span>
