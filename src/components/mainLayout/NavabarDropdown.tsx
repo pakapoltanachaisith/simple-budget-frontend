@@ -11,8 +11,8 @@ export default function NavabarDropdown() {
     <Menu>
       <MenuButton className="flex items-center p-1.5 hover:bg-neutral-100 rounded-md transition-colors cursor-pointer">
         <Avatar>{user?.name?.at(0)}</Avatar>
-        <span className="ml-2 text-sm">{user?.name}</span>
-        <ChevronDown className="size-4 ml-3" />
+        <span className="ml-2 text-sm hidden lg:inline">{user?.name}</span>
+        <ChevronDown className="size-4 ml-3 hidden lg:inline" />
       </MenuButton>
       <MenuItems
         anchor="bottom end"

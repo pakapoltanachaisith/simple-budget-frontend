@@ -29,7 +29,7 @@ export default function MainLayout() {
     <div className="h-screen w-screen overflow-hidden grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]">
       <Navbar />
       <Sidebar />
-      <main className="overflow-auto bg-neutral-100 p-8">
+      <main className="overflow-auto bg-neutral-100 p-8 col-span-2 lg:col-span-1">
         <Outlet />
         <div className="h-1000"></div>
       </main>

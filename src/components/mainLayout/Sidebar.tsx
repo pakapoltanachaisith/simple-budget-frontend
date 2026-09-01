@@ -22,7 +22,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-50 bg-neutral-50 border-r border-r-neutral-200">
+    <aside className="w-50 bg-neutral-50 border-r border-r-neutral-200 hidden lg:block">
       <nav className="m-2 space-y-1">
         {links.map((link) => (
           <SidebarLink key={link.label} {...link} />
