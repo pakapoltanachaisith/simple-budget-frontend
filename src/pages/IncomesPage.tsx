@@ -1,4 +1,5 @@
 import { fetchIncomes } from "@/api/incomes";
+import IncomeList from "@/components/IncomeList";
 import { useQuery } from "@tanstack/react-query";
 
 export default function IncomesPage() {
@@ -16,15 +17,14 @@ export default function IncomesPage() {
   }
 
   return (
-    <div>
-      <h1>Incomes</h1>
-      <ul>
-        {data.data.map((income) => (
-          <li key={income.id}>
-            {income.note} - ${income.amount / 100}
-          </li>
-        ))}
-      </ul>
+    <div className="mx-auto lg:w-3/4">
+      <h1 className="font-lora text-2xl lg:text-3xl font-bold mb-8 lg:mb-10">
+        My Incomes
+      </h1>
+
+      <div>
+        <IncomeList incomes={data.data} />
+      </div>
     </div>
   );
 }

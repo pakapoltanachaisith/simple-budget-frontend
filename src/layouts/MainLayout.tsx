@@ -37,9 +37,8 @@ export default function MainLayout() {
       <Navbar onOpenDrawer={toggleDrawer} />
       <Sidebar />
       <Drawer show={showDrawer} onClose={toggleDrawer} />
-      <main className="overflow-auto bg-neutral-100 p-8 col-span-2 lg:col-span-1">
+      <main className="overflow-auto bg-neutral-100 p-8 lg:p-10 col-span-2 lg:col-span-1">
         <Outlet />
-        <div className="h-1000"></div>
       </main>
     </div>
   );
