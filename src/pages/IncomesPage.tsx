@@ -1,6 +1,8 @@
-import { fetchIncomes } from "@/api/incomes";
-import IncomeList from "@/components/IncomeList";
 import { useQuery } from "@tanstack/react-query";
+
+import { fetchIncomes } from "@/api/incomes";
+import IncomeList from "@/components/incomes/IncomeList";
+import IncomesPageSkeleton from "@/components/incomes/IncomesPageSkeleton";
 
 export default function IncomesPage() {
   const { data, status, error } = useQuery({
@@ -9,7 +11,7 @@ export default function IncomesPage() {
   });
 
   if (status === "pending") {
-    return <p>Loading...</p>;
+    return <IncomesPageSkeleton />;
   }
 
   if (status === "error") {
