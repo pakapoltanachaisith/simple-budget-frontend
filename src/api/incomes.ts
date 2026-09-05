@@ -1,8 +1,15 @@
 import { apiFetch } from "./client";
 import type { Income, PaginatedResponse } from "./types";
 
-export const fetchIncomes = async (): Promise<PaginatedResponse<Income>> => {
-  const response = await apiFetch("/v1/incomes");
+interface Options {
+  page?: number;
+}
+
+export const fetchIncomes = async ({
+  page = 1,
+}: Options): Promise<PaginatedResponse<Income>> => {
+  const url = `/v1/incomes?page=${page}`;
+  const response = await apiFetch(url);
 
   if (!response.ok) {
     if (response.status.toString().startsWith("5")) {
