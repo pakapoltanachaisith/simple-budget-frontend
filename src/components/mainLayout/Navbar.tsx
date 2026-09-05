@@ -14,7 +14,7 @@ export default function Navbar({ onOpenDrawer }: NavbarProps) {
         <button
           onClick={onOpenDrawer}
           type="button"
-          className="lg:hidden mr-4 p-1.5 hover:opacity-50 transition-opacity">
+          className="lg:hidden mr-4 btn btn-square btn-ghost">
           <span className="sr-only">open side drawer</span>
           <PanelLeft className="text-neutral-400" />
         </button>
