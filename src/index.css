@@ -2,6 +2,12 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+html,
+root {
+  height: 100vh;
+  overflow: hidden;
+}
+
 @theme {
   --font-lora: "Lora", serif;
   --font-sans: "Nunito", sans-serif;
