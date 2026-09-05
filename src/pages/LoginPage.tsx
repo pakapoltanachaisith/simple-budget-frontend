@@ -21,9 +21,7 @@ export default function LoginPage() {
           <LoginForm />
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             Don't have an account?
-            <Link
-              to="/register"
-              className="font-semibold text-primary-600 hover:text-primary-500 ml-1">
+            <Link to="/register" className="link link-primary ml-1">
               Register
             </Link>
           </p>

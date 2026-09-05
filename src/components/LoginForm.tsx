@@ -1,14 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { AlertTriangle } from "lucide-react";
 
-import Button from "@components/Button";
-import Input from "@components/Input";
-import InputError from "@components/InputError";
-import Label from "@components/Label";
 import { loginFormSchema, type LoginFormData } from "@/lib/validation";
 import PasswordInput from "@/components/PasswordInput";
 import { useAuth } from "@/api/AuthContenxt";
-import { AlertTriangle } from "lucide-react";
 
 export default function LoginForm() {
   const {
@@ -39,37 +35,44 @@ export default function LoginForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Inputs */}
         <div className="space-y-3">
-          <div className="space-y-2">
-            <Label htmlFor="email">Email address</Label>
-            <Input
+          <div className="fieldset">
+            <label htmlFor="email" className="fieldset-legend">
+              Email Address
+            </label>
+            <input
               {...register("email")}
+              className="input w-full"
               id="email"
               type="email"
               autoComplete="email"
               placeholder="johndoe@example.com"
               disabled={isLoading}
               required
+              autoFocus
             />
-            <InputError message={errors.email?.message} />
+            {errors?.email?.message && (
+              <p className="label text-error">{errors.email.message}</p>
+            )}
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+          <div className="fieldset">
+            <label htmlFor="password">Password</label>
             <PasswordInput
               {...register("password")}
               id="password"
-              type="password"
               disabled={isLoading}
               required
             />
-            <InputError message={errors.password?.message} />
+            {errors?.password?.message && (
+              <p className="label text-error">afsgdhfjk</p>
+            )}
           </div>
         </div>
 
         <div className="mt-10">
-          <Button type="submit" fullWidth disabled={isLoading}>
+          <button type="submit" className="btn btn-block btn-primary">
             Continue
-          </Button>
+          </button>
         </div>
       </form>
     </>
