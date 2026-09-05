@@ -1,7 +1,6 @@
 import { Navigate } from "react-router";
 
 import { useAuth } from "@/api/AuthContenxt";
-import Button from "@/components/Button";
 
 export default function HomePage() {
   const { user, loading, logout } = useAuth();
@@ -18,7 +17,9 @@ export default function HomePage() {
     <div>
       <h1 className="text-4xl text-blue-500">Home Page</h1>
       <p>Hello, {user?.name}</p>
-      <Button onClick={logout}>Logout</Button>
+      <button className="btn btn-error" onClick={logout}>
+        Sign out
+      </button>
     </div>
   );
 }
