@@ -2,10 +2,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { AlertTriangle } from "lucide-react";
 
-import Button from "@components/Button";
-import Input from "@components/Input";
-import InputError from "@components/InputError";
-import Label from "@components/Label";
 import { registerFormSchema, type RegisterFormData } from "@/lib/validation";
 import PasswordInput from "@components/PasswordInput";
 import { useAuth } from "@/api/AuthContenxt";
@@ -44,20 +40,29 @@ export default function RegisterForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Inputs */}
         <div className="space-y-2">
-          <div className="space-y-1">
-            <Label htmlFor="name">Name</Label>
-            <Input
+          <div className="fieldset">
+            <label htmlFor="name" className="fieldset-legend">
+              Name
+            </label>
+            <input
               id="name"
+              className="input w-full"
               {...register("name")}
               placeholder="John Doe"
               required
               disabled={isLoading}
+              autoFocus
             />
-            <InputError message={errors?.name?.message} />
+            {errors?.name?.message && (
+              <p className="label text-error">{errors.name.message}</p>
+            )}
           </div>
-          <div className="space-y-1">
-            <Label htmlFor="email">Email address</Label>
-            <Input
+          <div className="fieldset">
+            <label htmlFor="email" className="fieldset-legend">
+              Email address
+            </label>
+            <input
+              className="input w-full"
               id="email"
               type="email"
               autoComplete="email"
@@ -66,36 +71,48 @@ export default function RegisterForm() {
               required
               disabled={isLoading}
             />
-            <InputError message={errors?.email?.message} />
+            {errors?.email?.message && (
+              <p className="label text-error">{errors.email.message}</p>
+            )}
           </div>
-          <div className="space-y-1">
-            <Label htmlFor="password">Password</Label>
+          <div className="fieldset">
+            <label htmlFor="password" className="fieldset-legend">
+              Password
+            </label>
             <PasswordInput
+              className="w-full"
               id="password"
-              type="password"
               {...register("password")}
               required
               disabled={isLoading}
             />
-            <InputError message={errors?.password?.message} />
+            {errors?.password?.message && (
+              <p className="label text-error">{errors.password.message}</p>
+            )}
           </div>
-          <div className="space-y-1">
-            <Label htmlFor="password_confirmation">Confirm Password</Label>
+          <div className="fieldset">
+            <label htmlFor="password_confirmation" className="fieldset-legend">
+              Confirm Password
+            </label>
             <PasswordInput
+              className="w-full"
               id="password_confirmation"
-              type="password"
               {...register("password_confirmation")}
               required
               disabled={isLoading}
             />
-            <InputError message={errors?.password_confirmation?.message} />
+            {errors?.password_confirmation?.message && (
+              <p className="label text-error">
+                {errors.password_confirmation.message}
+              </p>
+            )}
           </div>
         </div>
 
         <div className="mt-10">
-          <Button type="submit" fullWidth disabled={isLoading}>
+          <button type="submit" className="btn btn-primary btn-block">
             Create Account
-          </Button>
+          </button>
         </div>
       </form>
     </>
