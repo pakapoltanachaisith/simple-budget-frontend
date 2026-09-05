@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchIncomes } from "@/api/incomes";
 import IncomeList from "@/components/incomes/IncomeList";
 import IncomesPageSkeleton from "@/components/incomes/IncomesPageSkeleton";
+import IncomesPageError from "@/components/incomes/IncomesPageError";
 
 export default function IncomesPage() {
   const { data, status, error } = useQuery({
@@ -15,7 +16,7 @@ export default function IncomesPage() {
   }
 
   if (status === "error") {
-    return <p className="text-red-500">{error.message}</p>;
+    return <IncomesPageError message={error?.message} />;
   }
 
   return (
