@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { AlertTriangle } from "lucide-react";
 
 import { loginFormSchema, type LoginFormData } from "@/lib/validation";
 import PasswordInput from "@/components/PasswordInput";
@@ -24,11 +23,20 @@ export default function LoginForm() {
   return (
     <>
       {errorMessage && (
-        <div
-          className="flex p-2.5 rounded-md items-start bg-red-100 mb-3"
-          role="alert">
-          <AlertTriangle className="size-4 mr-4 text-red-500" />
-          <div className="flex-1 text-sm text-red-900">{errorMessage}</div>
+        <div role="alert" className="alert alert-error">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 shrink-0 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>{errorMessage}</span>
         </div>
       )}
 
