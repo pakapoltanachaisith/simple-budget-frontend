@@ -21,10 +21,10 @@ export default function IncomesPage() {
 
   return (
     <div className="mx-auto lg:w-3/4">
-      <h1 className="font-lora text-2xl lg:text-3xl font-bold mb-8 lg:mb-10">
-        My Incomes
-      </h1>
-
+      <div className="mb-8 lg:mb-10">
+        <h1 className="font-lora text-2xl lg:text-3xl font-bold">My Incomes</h1>
+        <div className="divider"></div>
+      </div>
       <div>
         <IncomeList incomes={data.data} />
       </div>

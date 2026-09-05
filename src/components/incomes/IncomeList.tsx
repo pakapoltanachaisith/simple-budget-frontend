@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 
 import type { Income } from "@/api/types";
 import WalletIcon from "@/assets/icons/wallet.svg";
+import { formatCurrency } from "@/lib/utils";
 
 interface IncomeListProps {
   incomes: Income[];
@@ -22,8 +23,8 @@ export default function IncomeList({ incomes }: IncomeListProps) {
               className="size-10 lg:size-12 mr-4 lg:mr-6"
             />
             <div className="flex flex-col overflow-hidden">
-              <span className="bg-green-100 self-start px-1 py-0.5 lg:px-1.5 lg:py-1 rounded-md font-mono text-sm text-green-800 font-medium border border-green-200">
-                ฿{income.amount / 100}
+              <span className="badge badge-success badge-soft">
+                {formatCurrency(income.amount)}
               </span>
               {income?.note && (
                 <span className="truncate text-neutral-500 mt-2">
